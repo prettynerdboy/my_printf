@@ -106,7 +106,9 @@ int ft_printf(const char *format, ...)
 	char	c;
 	char	*s;
 	int		d;
-	unsigned 	u;
+	unsigned int 	u;
+	unsigned int	h;
+	unsigned int	uh;
 	str = (char *)format;
 
 	va_start(ap,format);
@@ -131,10 +133,20 @@ int ft_printf(const char *format, ...)
 				d = va_arg(ap,int);
 				ft_putstr_fd(ft_itoa(d),1);
 			}
-			if (*str=='u')
+			if (*str == 'u')
 			{
 				u = va_arg(ap,unsigned int);
 				ft_putstr_fd(unsigned_itoa(u),1);
+			}
+			if (*str == 'x')
+			{
+				h = va_arg(ap,unsigned int);
+				ft_putstr_fd(change_hexnum(h),1);
+			}
+			if (*str == 'X')
+			{
+				uh = va_arg(ap,unsigned int);
+				//uhはstackに確保しているint型だからからマロックで確保したstringは上書きできない。
 			}
 			str++;
 		}
@@ -156,12 +168,15 @@ int main (void)
 	int i;
 	int *iptr;
 	int b;
+	unsigned int h;
 	i=1234;
 	iptr=&i;
 	b=89;
 	unsigned long u;
 	u=4294967295;
+	h=15;
 	ft_printf("%u",u);
+	ft_printf("%X",h);
 	// printf("%p\n",iptr);
 	// printf("%p\n",&i);
 	

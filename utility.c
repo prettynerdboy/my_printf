@@ -6,7 +6,7 @@
 /*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:53:21 by soaoki            #+#    #+#             */
-/*   Updated: 2024/08/31 10:17:07 by soaoki           ###   ########.fr       */
+/*   Updated: 2024/08/31 12:36:09 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,14 +136,27 @@ char	*change_hexnum(unsigned int h)
 
 
 //test change_hexnum
-int main(void)
-{
-	printf("%s\n",change_hexnum(0));
-	printf("%s\n",change_hexnum(9));
-	printf("%s\n",change_hexnum(15));
-	printf("%s\n",change_hexnum(16));
-	printf("%s\n",change_hexnum(88888));
+// int main(void)
+// {
+// 	printf("%s\n",change_hexnum(0));
+// 	printf("%s\n",change_hexnum(9));
+// 	printf("%s\n",change_hexnum(15));
+// 	printf("%s\n",change_hexnum(16));
+// 	printf("%s\n",change_hexnum(88888));
+// 	printf("%s\n",change_hexnum(4294967295));
+// 	return(0);
+// }
+
+// int main (void)
+// {
+// 	int x;
+// 	int *ptr;
+// 	unsigned long test;
 	
-	printf("%s\n",change_hexnum(4294967295));
-	return(0);
-}
+// 	x=1;
+// 	ptr=&x;
+// 	test =(unsigned long)ptr;
+// 	printf("x_value=%d\n",x);
+// 	printf("x_ptr=%p\n",ptr);
+// 	printf("%s\n",change_hexnum(test));
+// }
