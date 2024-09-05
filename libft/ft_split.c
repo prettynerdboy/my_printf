@@ -3,110 +3,118 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 14:02:46 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 17:58:50 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/08/09 12:40:24 by anakin            #+#    #+#             */
+/*   Updated: 2024/08/22 16:02:37 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-/*
-* Allocates (with malloc(3)) and returns an array
-	of strings obtained by splitting ’s’ using the
-	character ’c’ as a delimiter. The array must be
-	ended by a NULL pointer.
-* return : The array of new strings resulting from the split.
-	NULL if the allocation fails.
-*/
-
-static size_t	nb_place(char const *s, char c)
+static int	get_len(const char *str, char c)
 {
-	size_t	count;
+	int	len;
+	int	sflag;
 
-	count = 0;
-	while (1)
+	len = 0;
+	sflag = 0;
+	while (*str)
 	{
-		if (*s != c)
-			count++;
-		while (*s != c && *s != 0)
-			s++;
-		if (*s == 0)
-			break ;
-		while (*s == c && *s != 0)
-			s++;
-		if (*s == 0)
-			break ;
-	}
-	return (count);
-}
-
-static size_t	part_len(char const *s, char c)
-{
-	size_t	count;
-
-	count = 0;
-	while (*s != c && *s != 0)
-	{
-		count++;
-		s++;
-	}
-	return (count);
-}
-
-static void	free_table(char **tab, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-static int	fill_table(char const *s, char c, char **tab)
-{
-	size_t	count;
-	size_t	size_tab;
-
-	size_tab = 0;
-	while (1)
-	{
-		while (*s == c && *s != 0)
-			s++;
-		if (*s == 0)
-			break ;
-		count = part_len(s, c);
-		*tab = malloc(part_len(s, c) + 1);
-		if (!(*tab))
+		if (*str != c && !sflag)
 		{
-			free_table(tab - size_tab, size_tab);
-			return (0);
+			sflag = 1;
+			len++;
 		}
-		ft_strlcpy(*tab, s, count + 1);
-		s = s + count;
-		tab++;
-		size_tab++;
+		else if (*str == c)
+		{
+			sflag = 0;
+		}
+		str++;
 	}
-	*tab = NULL;
-	return (1);
+	return (len);
+}
+
+static char	*get_memory(char *str, char c)
+{
+	while (*str && (*str != c))
+		++str;
+	return (str);
+}
+
+static char	**check_str(const char *s, char c)
+{
+	char	**r;
+
+	r = (char **)ft_calloc(get_len(s, c) + 1, sizeof(char *));
+	if (!s || r == NULL)
+		return (NULL);
+	return (r);
+}
+
+static char	**free_all(char **r, int i)
+{
+	int	a;
+
+	a = 0;
+	while (a <= i)
+		free(r[a++]);
+	free(r);
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	count;
-	char	**tab;
+	char	**r;
+	int		i;
+	char	*from;
 
-	if (!s)
+	r = check_str(s, c);
+	if (!r)
 		return (NULL);
-	count = nb_place(s, c);
-	tab = malloc(sizeof(char *) * (count + 1));
-	if (!tab || !fill_table(s, c, tab))
-		return (NULL);
-	return (tab);
+	i = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			from = (char *)s;
+			s = get_memory((char *)s, c);
+			r[i] = (char *)ft_calloc((char *)s - from + 1, sizeof(char));
+			if (r[i] == NULL)
+				return (free_all(r, i));
+			ft_strlcpy(r[i++], from, (char *)s - from + 1);
+			if (*s == 0)
+				break ;
+		}
+		s++;
+	}
+	return (r);
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+//     char split='b';
+//     char str[30]="AAAbbBBbbCC";
+// 	char **result;
+// 	int i;
+// 	result = ft_split(str, split);
+// 	i=0;
+
+// while(result[i])
+//     {
+// 		printf("%s\n",result[i]);
+// 		i++;
+// 	}
+
+// i = 0;
+// 	while(result[i])
+// 		free(result[i++]);
+// 	free(result);
+
+// return (0);
+// }
+
+//一次元の配列の長さと二次元配列の両方の長さを把握する必要がある。
+//二次元配列の中にどうやって格納するか

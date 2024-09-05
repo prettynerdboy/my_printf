@@ -3,54 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 10:16:22 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 17:33:18 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/08/08 11:31:26 by anakin            #+#    #+#             */
+/*   Updated: 2024/08/21 21:22:23 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-/*
-* Allocates (with malloc(3)) and returns a substring
-	from the string ’s’.
-	The substring begins at index ’start’ and is of
-	maximum size ’len’.
-* The new string. NULL if the allocation fails.
-*/
+// #include <stdlib.h>
+// #include <stdio.h>
 
-//size_t because all given args are of type size_t
-static size_t	min(size_t a, size_t b)
+static char	*return_null(void)
 {
-	if (a > b)
-		return (b);
-	return (a);
+	char	*r;
+
+	r = (char *)ft_calloc(1, sizeof(char));
+	if (r == NULL)
+		return (0);
+	r[0] = '\0';
+	return (r);
 }
 
-// after line 45 : len > 0 && len(s) > start
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*res;
-	size_t	substr_len;
+	size_t	i;
+	size_t	s_len;
+	char	*dest;
 
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) <= start || len == 0)
+	s_len = ft_strlen(s);
+	if (start >= s_len || len == 0)
+		return (return_null());
+	if (s_len - start < len)
+		len = s_len - start;
+	dest = (char *)ft_calloc(len + 1, sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		res = malloc(1);
-		if (!res)
-			return (NULL);
-		*res = 0;
+		dest[i] = s[start + i];
+		i++;
 	}
-	else
-	{
-		substr_len = min(ft_strlen(s) - start, len);
-		res = malloc(substr_len + 1);
-		if (!res)
-			return (NULL);
-		ft_strlcpy(res, s + start, substr_len + 1);
-	}
-	return (res);
+	dest[i] = '\0';
+	return (dest);
 }

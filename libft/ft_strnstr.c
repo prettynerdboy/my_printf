@@ -3,51 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 18:33:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/20 19:04:49 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/08 17:58:27 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/28 11:28:47 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-* The strnstr() function locates the first occurrence of the 
-	null-terminated string needle in the string haystack, 
-	where not more than len characters are searched.
-    Characters that appear after a `\0' character are not searched.
-	
-* If needle is an empty string, haystack is returned; if needle occurs 
-	nowhere in haystack, NULL is returned; otherwise a pointer 
-	to the first character of the first occurrence of needle is returned.
-*/
-
-static int	compare(const char *str, const char *needle)
-{
-	while (*str == *needle && *needle)
-	{
-		str++;
-		needle++;
-	}
-	if (*str != *needle && *needle)
-		return (0);
-	return (1);
-}
-
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	needle_len;
+	unsigned int	i;
+	unsigned int	j;
 
-	needle_len = ft_strlen(needle);
-	if (*needle == 0)
+	i = 0;
+	if (!haystack && !len)
+		return (0);
+	if (needle[0] == '\0')
 		return ((char *)haystack);
-	while (*haystack != 0 && len >= needle_len)
+	while (haystack[i] != '\0')
 	{
-		if (compare(haystack, needle))
-			return ((char *)haystack);
-		haystack++;
-		len--;
+		j = 0;
+		while (haystack[i + j] == needle[j] && (i + j) < len)
+		{
+			if (haystack[i + j] == '\0' && needle[j] == '\0')
+				return ((char *)&haystack[i]);
+			j++;
+		}
+		if (needle[j] == '\0')
+			return ((char *)(haystack + i));
+		i++;
 	}
-	return (NULL);
+	return (0);
 }
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char test1[10] = "abcdefg";
+// 	char value1[10] = "bc";
+// 	char value2[10] = "";
+// 	char *r;
+// 	char *d;
+
+// 	r = ft_strnstr(test1, value1, 3);
+// 	d = ft_strnstr(test1, value2, 3);
+// 	printf("%s\n", r);
+// 	printf("%s\n", d);
+// }

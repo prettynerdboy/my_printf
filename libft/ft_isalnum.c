@@ -3,23 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:49:27 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/19 18:24:02 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/04/15 23:15:33 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:11:26 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-* The isalnum() function tests for any character
-	for which isalpha(3) or isdigit(3) is true.
-	The value of the argument must be representable
-	as an unsigned char or the value of EOF.
-*/
-
-int	ft_isalnum(int c)
+int	ft_isalnum(char c)
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0'
+			&& c <= '9'))
+		return (1);
+	else
+		return (0);
 }
+
+// #include <ctype.h>
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	printf("%d\n", ft_isalnum('a'));
+// 	printf("%d\n", isalnum('a'));
+// 	printf("%d\n", ft_isalnum('0'));
+// 	printf("%d\n", isalnum('0'));
+// 	printf("%d\n", ft_isalnum('-'));
+// 	printf("%d\n", isalnum('-'));
+// 	printf("%d\n", ft_isalnum(' '));
+// 	printf("%d\n", isalnum(' '));
+// 	return (0);
+// }

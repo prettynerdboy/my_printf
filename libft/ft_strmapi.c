@@ -3,42 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 16:46:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/19 21:49:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/08/15 11:16:33 by anakin            #+#    #+#             */
+/*   Updated: 2024/08/28 11:31:27 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-
-/*
-* Applies the function ’f’ to each character of
-	the string ’s’ , and passing its index as first
-	argument to create a new string (with malloc(3))
-	resulting from successive applications of ’f’.
-
-* The string created from the successive applications
-	of ’f’. Returns NULL if the allocation fails.
-*/
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		i;
-	char	*p;
+	char			*p;
+	unsigned int	index;
+	unsigned int	len;
 
-	if (!s || !f)
+	if (s == NULL)
 		return (NULL);
-	p = malloc(ft_strlen(s) + 1);
-	if (!p)
+	len = ft_strlen((char *)s);
+	p = (char *)malloc(len + 1);
+	if (p == NULL)
 		return (NULL);
-	i = 0;
-	while (s[i] != 0)
+	index = 0;
+	if (f == NULL)
+		ft_strlcpy(p, s, len);
+	else
 	{
-		p[i] = f(i, s[i]);
-		i++;
+		while (index < len)
+		{
+			p[index] = (*f)(index, s[index]);
+			index++;
+		}
+		p[len] = '\0';
 	}
-	p[i] = 0;
 	return (p);
 }

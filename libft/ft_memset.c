@@ -3,35 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:50:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 17:50:32 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/04/16 22:24:45 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:12:10 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*The memset() function writes len bytes of value c
-	(converted to an unsigned char) to the string b.
-================
-ptr : This is a pointer to the block of memory to fill.
-c : This is the value to be set.
-size : This is the number of bytes to be set to the value.
-=================
-return : it returns a pointer to the memory area
-*/
-
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *s, int c, size_t size)
 {
-	unsigned char	*p;
+	size_t			i;
+	unsigned char	*string;
 
-	p = b;
-	while (len > 0)
+	i = 0;
+	string = s;
+	while (i < size)
 	{
-		*p = (unsigned char)c;
-		p++;
-		len--;
+		string[i] = c;
+		i++;
 	}
-	return (b);
+	return (string);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	int	s1[] = "abcdefg";
+// 	int	s2[] = "abcdefg";
+
+// 	printf("%s\n", memset(s1, 'x', 5));
+// 	printf("%s\n", ft_memset(s1, 'x', 5));
+// }

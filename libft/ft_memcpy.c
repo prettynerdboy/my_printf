@@ -3,41 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:49:59 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/20 19:07:44 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/09 17:10:04 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:12:01 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-void *memcpy(void *dest, const void *src, size_t n)
-copies n characters from memory area src to memory area dest.
-=============
-dest : this is a pointer to the block of memory where
-the content is to be copied
-src : a pointer to the source of block of memory to be copied
-n : number of bytes to be copied
-=============
-return a pointer to destination
-*/
-
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	size_t	i;
+	char	*c;
+	char	*d;
 
-	if (!dst && !src && n)
+	i = 0;
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	d = dst;
-	s = src;
-	while (n-- > 0)
+	c = (char *)dst;
+	d = (char *)src;
+	while (i < n)
 	{
-		*d = *s;
-		d++;
-		s++;
+		c[i] = d[i];
+		i++;
 	}
-	return (dst);
+	return (c);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	a[10] = "aaaaaaaa";
+// 	char	b[10] = "123456";
+
+// 	ft_memcpy(a, b, 2);
+// 	printf("%s\n", a);
+// }

@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 11:58:10 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/20 19:09:08 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/11 18:13:41 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:04:50 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-* function converts an upper-case letter to the
-	corresponding lower-case letter.
-* If the argument is a upper-case letter, the toupper() function
-	returns the corresponding lower-case letter
-	if there is one; otherwise, the argument is returned unchanged.
-*/
-
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
+	if (c >= 65 && c <= 90)
+	{
 		return (c + 32);
-	return (c);
+	}
+	else
+		return (c);
 }
+
+// #include <ctype.h>
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	char	i;
+// 	char	j;
+// 	char	k;
+// 	char	l;
+
+// 	i = 65;
+// 	j = tolower(i);
+// 	k = 65;
+// 	l = ft_tolower(k);
+// 	printf("%c:%d\n", i, i);
+// 	printf("%c:%d\n", j, j);
+// 	printf("%c:%d\n", k, k);
+// 	printf("%c:%d\n", l, l);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anakin <anakin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:53:46 by anakin            #+#    #+#             */
-/*   Updated: 2024/09/03 17:32:06 by anakin           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:38:17 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 size_t	print_ptr(void *ptr)
 {
     size_t len;
-	len=write(1, "0x", 2);
 	if (!ptr)
-		return (print_hexnum(0, 'x') + len);
+		return (print_str("(nil)"));
+	len=write(1, "0x", 2);
 	return (print_hexnum((unsigned long)ptr, 'x') + len);
 }
 
+//！ptrは環境によるかもなので注意
 
 // #include <stdio.h>
 

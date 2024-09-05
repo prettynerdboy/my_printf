@@ -3,34 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:50:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 17:32:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/09 18:31:49 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:12:34 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// dstsize include a room for NULL termination
-// ft_strlcpy return the source length
-
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
+	size_t	len;
 
+	len = ft_strlen((char *)src);
 	i = 0;
-	while (*src != 0 && dstsize > 1)
+	if (dstsize == 0)
+		return (len);
+	while (src[i] && i < dstsize - 1)
 	{
-		*dst = *src;
-		src++;
-		dst++;
+		dst[i] = src[i];
 		i++;
-		dstsize--;
 	}
-	while (*src++ != 0)
-		i++;
-	if (dstsize)
-		*dst = 0;
-	return (i);
+	dst[i] = '\0';
+	return (len);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	a[10] = "hello";
+// 	char	b[10] = "world!";
+// 	char	c[10] = "hello";
+// 	char	d[10] = "world!";
+// 	int		len1;
+// 	int		len2;
+
+// 	len1 = strlcpy(a, b, 3);
+// 	len2 = ft_strlcpy(c, d, 3);
+// 	printf("%d\n", len1);
+// 	printf("%s\n", a);
+// 	printf("%d\n", len2);
+// 	printf("%s\n", c);
+// }

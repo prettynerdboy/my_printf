@@ -3,26 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:49:23 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/20 19:06:35 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/04/18 22:08:42 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/21 18:12:42 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// The bzero() function shall place n zero-valued... 
-// bytes in the area pointed to by s.
-
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*p;
+	size_t			i;
+	unsigned char	*dest;
 
-	p = s;
-	while (n-- > 0)
+	i = 0;
+	dest = (unsigned char *)s;
+	while (i < n)
 	{
-		*p = 0;
-		p++;
+		dest[i] = 0;
+		i++;
 	}
 }
+
+// int	main(void)
+// {
+// 	char	s1[10] = "abcdefg";
+// 	char	s2[10] = "abcdefg";
+
+// 	printf("%s\n", bzero(s1, 1));
+// 	ft_bzero(s2, 1);
+// 	printf("%s\n", s2);
+// }

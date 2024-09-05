@@ -3,35 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 17:49:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 17:44:21 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/09 15:02:47 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:11:52 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-* The memchr() function locates the first occurrence of c 
-	(converted to an unsigned char) in string s.
-* The memchr() function returns a pointer to the byte located, or NULL 
-	if no such byte exists within n bytes.
-*/
-
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *dest, int c, size_t n)
 {
-	unsigned char	i;
+	size_t			i;
+	unsigned char	*d;
 
-	if (n == 0)
-		return (NULL);
-	i = c;
-	while (n > 1 && *((unsigned char *)s) != i)
+	d = (unsigned char *)dest;
+	i = 0;
+	while (i < n)
 	{
-		s++;
-		n--;
+		if (*d == (unsigned char)c)
+		{
+			return (d);
+		}
+		i++;
+		d++;
 	}
-	if (n == 1 && *((unsigned char *)s) != i)
-		return (NULL);
-	return ((void *)s);
+	return (0);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	test1[10] = "abcde";
+// 	char	test2[10] = "abcde";
+
+// 	printf("memchr\n");
+// 	printf("%s\n", memchr(test1, 'c', 2));
+// 	printf("%s\n", memchr(test1, 'a', 2));
+// 	printf("%s\n", memchr(test1, 'c', 3));
+// 	printf("%s\n", memchr(test1, 'z', 5));
+// 	printf("ft_memchr\n");
+// 	printf("%s\n", ft_memchr(test1, 'c', 2));
+// 	printf("%s\n", ft_memchr(test1, 'a', 2));
+// 	printf("%s\n", ft_memchr(test1, 'c', 3));
+// 	printf("%s\n", ft_memchr(test1, 'z', 5));
+// }

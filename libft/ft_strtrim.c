@@ -3,81 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 12:08:30 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 18:56:44 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/08/09 09:03:32 by anakin            #+#    #+#             */
+/*   Updated: 2024/08/22 16:12:52 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-
-/*
-* Allocates (with malloc(3)) and returns a copy of
-	’s1’ with the characters specified in ’set’ removed
-	from the beginning and the end of the string.
-* The trimmed string. NULL if the allocation fails.
-*/
-
-static int	is_in_set(char const *set, char c)
-{
-	while (*set != c && *set != 0)
-		set++;
-	if (*set == 0)
-		return (0);
-	return (1);
-}
-
-static size_t	locate_beginning(char const *s1, char const *set)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] && is_in_set(set, s1[i]))
-		i++;
-	return (i);
-}
-
-static size_t	locate_end(char const *s1, char const *set)
-{
-	size_t	length;
-	size_t	i;
-
-	length = ft_strlen(s1);
-	if (length == 0)
-		return (0);
-	i = length - 1;
-	while (i > 0 && is_in_set(set, s1[i]))
-		i--;
-	return (i);
-}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t		s;
-	size_t		e;
-	char		*trimed;
+	size_t	start;
+	size_t	last;
+	char	*str;
 
-	if (!s1)
-		return (NULL);
-	if (!set)
-		set = ft_strdup("");
-	s = locate_beginning(s1, set);
-	e = locate_end(s1, set);
-	if (*s1 && e >= s)
+	str = 0;
+	if (s1 != 0 && set != 0)
 	{
-		trimed = malloc(e - s + 2);
-		if (!trimed)
+		start = 0;
+		last = ft_strlen((char *)s1);
+		while (s1[start] && ft_strchr(set, s1[start]))
+			start++;
+		while (s1[last - 1] && ft_strchr(set, s1[last - 1]) && last > start)
+			last--;
+		str = (char *)malloc(sizeof(char) * (last - start + 1));
+		if (str == NULL)
 			return (NULL);
-		ft_strlcpy(trimed, s1 + s, e - s + 2);
+		else
+		{
+			if (str)
+				ft_strlcpy(str, &s1[start], last - start + 1);
+		}
 	}
-	else
-	{
-		trimed = malloc(1);
-		if (!trimed)
-			return (NULL);
-		*trimed = 0;
-	}
-	return (trimed);
+	return (str);
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+//     char test[20]="1234AAA22331122";
+//     char trim[10]="1234";
+//     char *result=ft_strtrim(test,trim);
+
+//     printf("%s\n",result);
+//     free(result);
+
+// }

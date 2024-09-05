@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 11:47:49 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/20 19:09:13 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/14 17:58:59 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:13:14 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-* toupper() function converts a lower-case letter to the 
-	corresponding upper-case letter.
-* If the argument is a lower-case letter, the toupper() function
-	returns the corresponding upper-case letter
-	if there is one; otherwise, the argument is 
-	returned unchanged.
-*/
-
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (c >= 97 && c <= 122)
+	{
 		return (c - 32);
-	return (c);
+	}
+	else
+		return (c);
 }
+
+// #include <ctype.h>
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	i;
+// 	char	j;
+// 	char	k;
+// 	char	l;
+
+// 	i = 97;
+// 	j = toupper(i);
+// 	k = 97;
+// 	l = ft_toupper(k);
+// 	printf("%c:%d\n", i, i);
+// 	printf("%c:%d\n", j, j);
+// 	printf("%c:%d\n", k, k);
+// 	printf("%c:%d\n", l, l);
+// }

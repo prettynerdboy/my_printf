@@ -3,41 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:43:31 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/22 17:48:44 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/09 18:12:16 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:12:05 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-The memmove() function shall copy the first n bytes pointed ..
-to by src to the buffer pointed to by dest. Source and destination may overlap.
-*/
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int	i;
+	char		*d;
+	const char	*s;
 
-	if (!dst && !src && len)
+	if (dest == NULL && src == NULL)
 		return (NULL);
-	i = 0;
-	if (dst > src)
+	d = (char *)dest;
+	s = (const char *)src;
+	if (src < dest && (char *)src + n > (char *)dest && n != 0)
 	{
-		while (len-- > 0)
-		{
-			*((unsigned char *)(dst + len)) = *((unsigned char *)(src + len));
-		}
+		d = d + n - 1;
+		s = s + n - 1;
+		while (n--)
+			*d-- = *s--;
 	}
 	else
-	{
-		while (len-- > 0)
-		{
-			*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);
-			i++;
-		}
-	}
-	return (dst);
+		while (n--)
+			*d++ = *s++;
+	return (dest);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	a[10] = "aaaaaaaa";
+// 	char	b[10] = "123456";
+
+// 	memmove(a, b, 2);
+// 	printf("%s\n", a);
+// }

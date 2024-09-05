@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anakin <anakin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 16:03:39 by aben-ham          #+#    #+#             */
-/*   Updated: 2024/09/03 18:19:07 by anakin           ###   ########.fr       */
+/*   Created: 2024/08/14 19:40:15 by anakin            #+#    #+#             */
+/*   Updated: 2024/08/22 00:43:03 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ static size_t	get_digits(int n)
 {
 	size_t	i;
 
-	i = 1;
-	while (n /= 10)
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		n = n / 10;
 		i++;
+	}
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char		*str_num;
 	size_t		digits;
@@ -35,7 +40,8 @@ char			*ft_itoa(int n)
 		num *= -1;
 		digits++;
 	}
-	if (!(str_num = (char *)malloc(sizeof(char) * (digits + 1))))
+	str_num = (char *)malloc(sizeof(char) * (digits + 1));
+	if (!str_num)
 		return (NULL);
 	*(str_num + digits) = 0;
 	while (digits--)
@@ -47,3 +53,12 @@ char			*ft_itoa(int n)
 		*(str_num + 0) = '-';
 	return (str_num);
 }
+// #include <stdio.h>
+// int main(void)
+// {
+//     int value=0;
+//     char * number;
+
+//     number =ft_itoa(value);
+//     printf("%s\n",number);
+// }

@@ -3,37 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 16:50:16 by marvin            #+#    #+#             */
-/*   Updated: 2021/11/22 17:25:41 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/06/15 01:17:11 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:12:47 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-* function locates the last occurrence of c (converted to a char)
-	in the string pointed to by s.
-* The terminating null character is considered to be part of the 
-	string; therefore if c is `\0', the functions locate the 
-	terminating `\0'.
-* The functions strchr() and strrchr() return a pointer to the
-	located character, or NULL if the character does not appear in the string.
-*/
-
 char	*ft_strrchr(const char *s, int c)
 {
-	char	*p;
+	int		i;
+	int		s_len;
+	char	*buff;
+	char	*result;
 
-	p = NULL;
-	while (*s != 0)
+	i = 0;
+	buff = (char *)s;
+	result = buff;
+	s_len = (int)ft_strlen(buff);
+	while (i < s_len)
 	{
-		if (*s == (char)c)
-			p = (char *)s;
-		s++;
+		if (*buff == (char)c)
+			result = (char *)buff;
+		buff++;
+		i++;
 	}
-	if ((char)c == 0)
-		return ((char *)s);
-	return (p);
+	if ((char)c == '\0')
+		return (buff);
+	if (*result == (char)c)
+		return (result);
+	return (0);
 }
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	test1[20] = "ilove42tokyo";
+// 	char	test2[20] = "ilove42tokyo";
+
+// 	printf("%s\n", strrchr(test1, 'i'));
+// 	printf("%s\n", strrchr(test1, '\0'));
+// 	printf("%s\n", strrchr(test1, 101));
+// 	printf("%s\n", strrchr(test1, 'h'));
+// 	printf("%s\n", ft_strrchr(test2, 'i'));
+// 	printf("%s\n", ft_strrchr(test2, '\0'));
+// 	printf("%s\n", ft_strrchr(test2, 101));
+// 	printf("%s\n", ft_strrchr(test2, 'h'));
+// }

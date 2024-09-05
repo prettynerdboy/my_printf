@@ -3,20 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soaoki <soaoki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:49:33 by aben-ham          #+#    #+#             */
-/*   Updated: 2021/11/20 19:06:43 by aben-ham         ###   ########.fr       */
+/*   Created: 2024/04/15 21:40:39 by soaoki            #+#    #+#             */
+/*   Updated: 2024/08/22 16:11:07 by soaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*The isalpha() function checks whether a character is an alphabet or not.*/
-
 int	ft_isalpha(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
-	return (0);
+	else
+		return (0);
 }
+// #include <ctype.h>
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	printf("%d\n", ft_isalpha('a'));
+// 	printf("%d\n", isalpha('a'));
+// 	printf("%d\n", ft_isalpha('0'));
+// 	printf("%d\n", isalpha('0'));
+// 	printf("%d\n", ft_isalpha('-'));
+// 	printf("%d\n", isalpha('-'));
+// 	return (0);
+// }
